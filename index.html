@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | banabana</title>
+    <meta name="description" content="応用情報工学科 banabanaのポートフォリオサイトです。">
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* --- Reset & Base Variables --- */
+        :root {
+            --primary-color: #0056b3; /* 知的な濃い青 */
+            --accent-color: #4dabf7;  /* 明るい青 */
+            --bg-color: #ffffff;
+            --bg-light: #f1f3f5;
+            --text-color: #333333;
+            --text-light: #666666;
+            --font-main: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            --container-width: 1000px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-color);
+            line-height: 1.8;
+            background-color: var(--bg-color);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- Layout Components --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            height: 70px;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 背景の装飾 */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -5%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(77, 171, 247, 0.1) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            letter-spacing: 0.02em;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(77, 171, 247, 0.4);
+        }
+
+        /* --- About Section --- */
+        #about {
+            background-color: var(--bg-color);
+        }
+
+        .about-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .profile-card {
+            background-color: #fff;
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+        }
+
+        .profile-icon-box {
+            width: 100px;
+            height: 100px;
+            background-color: var(--bg-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .profile-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .profile-dept {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .profile-desc {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* Skills */
+        .skills-list {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .skill-item {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Gakuchika Box */
+        .gakuchika-wrapper {
+            margin-top: 20px;
+            background-color: #f8fbff;
+            border: 1px solid #e1f0ff;
+            border-radius: 12px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .gakuchika-wrapper::before {
+            content: '\f19d'; /* FontAwesome Graduation Cap */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            top: -25px;
+            left: 30px;
+            background-color: var(--accent-color);
+            color: #fff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(77, 171, 247, 0.4);
+        }
+
+        .gakuchika-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-left: 10px;
+            margin-top: 10px;
+        }
+
+        .gakuchika-text {
+            line-height: 2;
+            color: var(--text-color);
+            text-align: justify;
+        }
+
+        /* --- Works Section --- */
+        #works {
+            background-color: var(--bg-light);
+        }
+
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .work-card {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #eaeaea;
+        }
+
+        .work-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* 画像の代わりのアイコンボックス */
+        .work-icon-box {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 4rem;
+        }
+
+        .work-content {
+            padding: 25px;
+        }
+
+        .work-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .work-content p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            min-height: 3em;
+        }
+
+        .work-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .work-tag {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            background-color: #f1f3f5;
+            border-radius: 4px;
+            color: #666;
+        }
+
+        /* --- Contact Section --- */
+        #contact {
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-color);
+            color: #fff;
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9rem;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .profile-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .gakuchika-wrapper {
+                padding: 30px 20px;
+            }
+            
+            .gakuchika-wrapper::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            
+            .gakuchika-title {
+                text-align: center;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-inner">
+            <div class="logo">
+                <i class="fa-solid fa-laptop-code"></i>
+                My Portfolio
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#works">Works</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <i class="fa-regular fa-paper-plane hero-icon"></i>
+                <h1>banabana</h1>
+                <p>Department of Applied Information Engineering</p>
+                <a href="#about" class="btn">View More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="about-container">
+                <!-- Profile Basic -->
+                <div class="profile-card">
+                    <div class="profile-icon-box">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="profile-text">
+                        <h3>banabana</h3>
+                        <span class="profile-dept">応用情報工学科</span>
+                        <p class="profile-desc">
+                            情報技術を活用した課題解決に興味があります。
+                            大学ではプログラミングの基礎から応用まで幅広く学んでおり、
+                            特にWeb開発とPythonによるデータ処理に関心を持っています。
+                        </p>
+                        <div class="skills-list">
+                            <span class="skill-item"><i class="fa-brands fa-html5"></i> HTML/CSS</span>
+                            <span class="skill-item"><i class="fa-brands fa-js"></i> JavaScript</span>
+                            <span class="skill-item"><i class="fa-brands fa-python"></i> Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gakuchika (学生時代に力を入れたこと) -->
+                <div class="gakuchika-wrapper">
+                    <h3 class="gakuchika-title">学生時代に力を入れたこと</h3>
+                    <p class="gakuchika-text">
+                        私が学生時代に力を入れたことは、文化祭の企画運営です。
+                        高校時代、所属する部活の展示企画を担当しましたが、当初は良い案が出ず、内容が全く決まらないという課題がありました。
+                        そこで私は、まず全員から必ず一つ案を募ることを提案しました。さらに、集まった案をただ選ぶのではなく、実現可能性や面白さを軸に全員で議論を尽くす場を設け、合意形成を図りました。
+                        結果、部員全員が納得して準備に取り組める企画がまとまり、当日は去年を上回る来場者数を達成することができました。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works">
+        <div class="container">
+            <h2 class="section-title">Works</h2>
+            <div class="works-grid">
+                <!-- Work 1 -->
+                <article class="work-card">
+                    <div class="work-icon-box">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <div class="work-content">
+                        <h3>Portfolio Site</h3>
+                        <div class="work-tags">
+                            <span class="work-tag">HTML</span>
+                            <span class="work-tag">CSS</span>
+                        </div>
+                        <p>このポートフォリオサイトです。レスポンシブデザインに対応し、清潔感のあるデザインを心がけました。</p>
+                    </div>
+                </article>
+
+                <!-- Work 2 -->
+                <article class="work-card">
+                    <div class="work-icon-box">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="work-content">
+                        <h3>Automation Tool</h3>
+                        <div class="work-tags">
+                            <span class="work-tag">Python</span>
+                            <span class="work-tag">Selenium</span>
+                        </div>
+                        <p>日々のルーチンワークを自動化するスクリプトを作成しました。作業時間を大幅に短縮しました。</p>
+                    </div>
+                </article>
+
+                <!-- Work 3 -->
+                <article class="work-card">
+                    <div class="work-icon-box">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </div>
+                    <div class="work-content">
+                        <h3>Mini Game</h3>
+                        <div class="work-tags">
+                            <span class="work-tag">Unity</span>
+                            <span class="work-tag">C#</span>
+                        </div>
+                        <p>2Dアクションゲームの試作を行いました。物理演算の基礎とUIデザインについて学びました。</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-icon">
+                <i class="fa-regular fa-envelope"></i>
+            </div>
+            <p class="contact-text">ご連絡は以下のメールアドレスまでお願いいたします。</p>
+            <a href="mailto:ringo.w@example.com" class="btn">Send Email</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 banabana. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
