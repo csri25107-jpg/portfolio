@@ -10,10 +10,10 @@
     <style>
         /* --- Reset & Base Variables --- */
         :root {
-            --primary-color: #0056b3; /* 知的な濃い青 */
-            --accent-color: #4dabf7;  /* 明るい青 */
+            --primary-color: #558b2f; /* 落ち着いた黄緑 */
+            --accent-color: #8bc34a;  /* 明るい黄緑（ライムグリーン） */
             --bg-color: #ffffff;
-            --bg-light: #f1f3f5;
+            --bg-light: #f1f8e9;      /* 非常に薄い黄緑 */
             --text-color: #333333;
             --text-light: #666666;
             --font-main: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
@@ -136,7 +136,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #f1f8e9 0%, #ffffff 100%); /* 背景色も薄い黄緑へ変更 */
             position: relative;
             overflow: hidden;
         }
@@ -149,7 +149,7 @@
             right: -5%;
             width: 50vw;
             height: 50vw;
-            background: radial-gradient(circle, rgba(77, 171, 247, 0.1) 0%, rgba(255,255,255,0) 70%);
+            background: radial-gradient(circle, rgba(139, 195, 74, 0.1) 0%, rgba(255,255,255,0) 70%); /* 装飾も黄緑系へ */
             border-radius: 50%;
             z-index: 0;
         }
@@ -163,13 +163,24 @@
             font-size: 4rem;
             color: var(--accent-color);
             margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
+            /* 画面左端から右端へ動きながらバウンドするアニメーション */
+            animation: runAndBounce 6s linear infinite;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
+        /* 左右に走りながら上下にバウンドするアニメーション */
+        @keyframes runAndBounce {
+            0%   { transform: translate(-60vw, 0); opacity: 0; }
+            5%   { opacity: 1; }
+            10%  { transform: translate(-48vw, -30px); }
+            20%  { transform: translate(-36vw, 0); }
+            30%  { transform: translate(-24vw, -30px); }
+            40%  { transform: translate(-12vw, 0); }
+            50%  { transform: translate(0vw, -30px); } /* 画面中央付近 */
+            60%  { transform: translate(12vw, 0); }
+            70%  { transform: translate(24vw, -30px); }
+            80%  { transform: translate(36vw, 0); }
+            90%  { transform: translate(48vw, -30px); opacity: 1; }
+            100% { transform: translate(60vw, 0); opacity: 0; }
         }
 
         .hero-content h1 {
@@ -193,14 +204,15 @@
             color: #fff;
             border-radius: 50px;
             font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 86, 179, 0.3);
+            box-shadow: 0 4px 15px rgba(85, 139, 47, 0.3); /* 影の色を黄緑系へ */
             transition: all 0.3s;
+            cursor: pointer; /* クリックできるようにカーソル変更 */
         }
 
         .btn:hover {
             background-color: var(--accent-color);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(77, 171, 247, 0.4);
+            box-shadow: 0 6px 20px rgba(139, 195, 74, 0.4); /* ホバー時の影も黄緑系へ */
         }
 
         /* --- About Section --- */
@@ -276,8 +288,8 @@
         /* Gakuchika Box */
         .gakuchika-wrapper {
             margin-top: 20px;
-            background-color: #f8fbff;
-            border: 1px solid #e1f0ff;
+            background-color: #f9fbe7; /* ボックス背景も薄い黄緑系へ */
+            border: 1px solid #dcedc8;
             border-radius: 12px;
             padding: 40px;
             position: relative;
@@ -300,7 +312,7 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            box-shadow: 0 5px 15px rgba(77, 171, 247, 0.4);
+            box-shadow: 0 5px 15px rgba(139, 195, 74, 0.4); /* アイコンの影も黄緑系へ */
         }
 
         .gakuchika-title {
@@ -397,6 +409,100 @@
             margin-bottom: 20px;
         }
 
+        /* --- Modal for Trolling --- */
+        .modal-overlay {
+            display: none; /* 初期状態は非表示 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            border: 4px solid var(--primary-color);
+            position: relative;
+            transform: scale(0.9);
+            animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popUp {
+            to { transform: scale(1); }
+        }
+
+        .modal-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .modal-close {
+            background: var(--text-light);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .modal-close:hover {
+            background: var(--text-color);
+        }
+
+        /* --- Dog Pop-up Animation --- */
+        .dog-popup-overlay {
+            display: none; /* 初期状態非表示 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            pointer-events: none; /* クリックを透過 */
+        }
+
+        .dog-popup-icon {
+            font-size: 20rem; /* かなり大きく */
+            color: var(--primary-color);
+            /* アニメーションはJSでクラス付与時に再生 */
+        }
+
+        /* アニメーション定義 */
+        .animate-dog-zoom {
+            animation: dogZoom 0.8s ease-out forwards;
+        }
+
+        @keyframes dogZoom {
+            0% { transform: scale(0.1) rotate(0deg); opacity: 0; }
+            40% { transform: scale(1.5) rotate(-10deg); opacity: 1; } /* 飛び出す */
+            60% { transform: scale(1.2) rotate(10deg); opacity: 1; }  /* 少し落ち着く */
+            100% { transform: scale(5) rotate(0deg); opacity: 0; }     /* 拡大して消える */
+        }
+
         /* --- Footer --- */
         footer {
             background-color: var(--primary-color);
@@ -435,6 +541,10 @@
                 text-align: center;
                 margin-top: 20px;
             }
+            
+            .dog-popup-icon {
+                font-size: 10rem; /* モバイルでは少し小さく */
+            }
         }
     </style>
 </head>
@@ -444,7 +554,7 @@
     <header>
         <div class="header-inner">
             <div class="logo">
-                <i class="fa-solid fa-laptop-code"></i>
+                <i class="fa-solid fa-dog"></i>
                 My Portfolio
             </div>
             <nav>
@@ -461,7 +571,7 @@
     <section id="hero">
         <div class="container">
             <div class="hero-content">
-                <i class="fa-regular fa-paper-plane hero-icon"></i>
+                <i class="fa-solid fa-dog hero-icon"></i>
                 <h1>banabana</h1>
                 <p>Department of Applied Information Engineering</p>
                 <a href="#about" class="btn">View More</a>
@@ -571,7 +681,8 @@
                 <i class="fa-regular fa-envelope"></i>
             </div>
             <p class="contact-text">ご連絡は以下のメールアドレスまでお願いいたします。</p>
-            <a href="mailto:ringo.w@example.com" class="btn">Send Email</a>
+            <!-- IDを追加し、hrefを無効化 -->
+            <a href="javascript:void(0)" id="emailBtn" class="btn">Send Email</a>
         </div>
     </section>
 
@@ -581,6 +692,59 @@
             <p>&copy; 2024 banabana. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <!-- Troll Modal -->
+    <div class="modal-overlay" id="trollModal">
+        <div class="modal-content">
+            <!-- ウィンクするアイコンに変更 -->
+            <i class="fa-regular fa-face-smile-wink" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 20px;"></i>
+            <p class="modal-text">お問い合わせありがとうございます！<br>ただ、返信はかなり気まぐれなので、<br>気長～にお待ちいただけると嬉しいです！</p>
+            <button class="modal-close" onclick="closeModal()">了解しました！</button>
+        </div>
+    </div>
+
+    <!-- Dog Pop-up Overlay (Hidden by default) -->
+    <div class="dog-popup-overlay" id="dogPopup">
+        <i class="fa-solid fa-dog dog-popup-icon" id="dogPopupIcon"></i>
+    </div>
+
+    <!-- JavaScript for Modal -->
+    <script>
+        const emailBtn = document.getElementById('emailBtn');
+        const modal = document.getElementById('trollModal');
+        const dogPopup = document.getElementById('dogPopup');
+        const dogPopupIcon = document.getElementById('dogPopupIcon');
+
+        emailBtn.addEventListener('click', function() {
+            modal.style.display = 'flex';
+        });
+
+        function closeModal() {
+            // 1. メッセージモーダルを閉じる
+            modal.style.display = 'none';
+
+            // 2. 犬アップ用オーバーレイを表示
+            dogPopup.style.display = 'flex';
+            
+            // 3. アニメーションクラスを付与して再生
+            // アニメーションをリセットするために一旦クラスを外す（念のため）
+            dogPopupIcon.classList.remove('animate-dog-zoom');
+            void dogPopupIcon.offsetWidth; // リフロー強制
+            dogPopupIcon.classList.add('animate-dog-zoom');
+
+            // 4. アニメーション終了時間（0.8秒）に合わせて非表示にする
+            setTimeout(() => {
+                dogPopup.style.display = 'none';
+            }, 800);
+        }
+
+        // モーダルの背景クリックでも閉じるようにする
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    </script>
 
 </body>
 </html>
